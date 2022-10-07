@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 export default function SelectFilm () {
 
-    const [listFilms, setListFilms] = useState("");
+    const [listFilms, setListFilms] = useState([]);
 
 	useEffect(() => {
 		const requisicao = axios.get("https://mock-api.driven.com.br/api/v5/cineflex/movies");
@@ -45,16 +45,20 @@ const Select = styled.div`
         display: flex;
         width: 320px;
         flex-wrap: wrap;
+        justify-content: space-between;
     }
 
     .Films div {
         width: 145px;
-        height: 290px;
+        height: 200px;
         box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
         border-radius: 3px;
+        padding-top: 8px;
+        margin-bottom: 11px;
     }
 
     .Films img {
         width: 129px;
+        height: 193px;
     }
 `
