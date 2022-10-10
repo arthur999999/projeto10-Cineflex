@@ -3,14 +3,11 @@ import {  useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-export default function SelectChair () {
+export default function SelectChair ({namee, setNamee, cpf, setCpf, film, setFilm, greenList, setGreenList, seatNumb, setSeatNumb}) {
     const { id } = useParams();
     const [seatList, setSeatList] = useState([])
-    const [greenList, setGreenList] = useState([])
     const [ylList, setYlList] = useState([])
-    const [namee, setNamee] = useState('')
-    const [cpf, setCpf] = useState('')
-    const [film, setFilm] = useState(undefined)
+    
     function classColor (m) {
         if(greenList.includes(m.id)){
             return (
@@ -30,10 +27,11 @@ export default function SelectChair () {
     }
 
     function greenToggle (m) {
-        if(greenList.includes(m)){
-            setGreenList(greenList.filter((z)=> z !== m ))
+        setSeatNumb([...seatNumb, m.name])
+        if(greenList.includes(m.id)){
+            setGreenList(greenList.filter((z)=> z !== m.id ))
         }else {
-            setGreenList([...greenList, m])
+            setGreenList([...greenList, m.id])
         }
         
     }
@@ -44,15 +42,10 @@ export default function SelectChair () {
 
         event.preventDefault(); // impede o redirecionamento
 
-		const requisicaoPost = axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", {
-			ids: greenList,
-	        name: namee,
-	        cpf: cpf
-		});
-        requisicaoPost.then(res => console.log(res))
-        requisicaoPost.then(window.location = '/sucesso')
-    }
 
+        
+    }
+    
     useEffect(() => {
 		const requisicao = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${id}/seats`);
 
@@ -68,7 +61,7 @@ export default function SelectChair () {
         <>
         <Select>
             <h2>Selecione o(s) assento(s)</h2>
-            <div className="seats">{seatList.map((m, key)=><button key={key} onClick={ylList.includes(m)? undefined : ()=> greenToggle(m.id)} className={(classColor(m))}>{m.name > 9 ? m.name: `0${m.name}`}</button>)}</div>
+            <div className="seats">{seatList.map((m, key)=><button key={key} onClick={ylList.includes(m)? undefined : ()=> greenToggle(m)} className={(classColor(m))}>{m.name > 9 ? m.name: `0${m.name}`}</button>)}</div>
             <div className="seats"><div><button className="green seat"></button><p>Selecionado</p></div><div><button className="seat"></button><p>Disponível</p></div><div><button className="yellow seat"></button><p>Indisponível</p></div></div>
             <form onSubmit={reservSeat}>
 
@@ -80,9 +73,11 @@ export default function SelectChair () {
                     
                 </div>
                 
-                
-
+                <Link to="/sucesso">
                     <button type="submit">Reservar assento(s)</button>
+
+                </Link>
+
                 
               
             </form>
