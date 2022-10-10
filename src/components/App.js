@@ -2,6 +2,8 @@ import Header from "./Header";
 import styled from 'styled-components';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SelectFilm from "./SelectFilm";
+import SelectHour from "./SelectHour";
+import SelectChair from "./SelectChair";
 
 
 export default function App () {
@@ -13,6 +15,8 @@ export default function App () {
                 <Header/>
                 <Routes>
                     <Route path="/" element={<SelectFilm/>} />
+                    <Route path="/filme/:id" element={<SelectHour/>} />
+                    <Route path="/sessao/:id" element={<SelectChair/>} />
                 </Routes>
 
             </GlobalStyles>

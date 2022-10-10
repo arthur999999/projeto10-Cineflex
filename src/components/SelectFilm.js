@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function SelectFilm () {
 
@@ -22,7 +23,7 @@ export default function SelectFilm () {
             
 
             <div className="Films">
-                {listFilms.map((m)=><div><img src={m.posterURL} alt="what" /></div>)}
+                {listFilms.map((m)=><Link to={`/filme/${m.id}`} ><div><img src={m.posterURL} alt="what" /></div></Link>)}
             </div>
             
         </div>
