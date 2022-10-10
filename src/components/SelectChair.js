@@ -2,6 +2,7 @@ import styled from "styled-components"
 import {  useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
+
 export default function SelectChair () {
     const { id } = useParams();
     const [seatList, setSeatList] = useState([])
@@ -49,6 +50,7 @@ export default function SelectChair () {
 	        cpf: cpf
 		});
         requisicaoPost.then(res => console.log(res))
+        requisicaoPost.then(window.location = '/sucesso')
     }
 
     useEffect(() => {
@@ -59,6 +61,7 @@ export default function SelectChair () {
             console.log(res.data)
             setYlList((res.data.seats).filter((m)=> m.isAvailable === false))
             setFilm(res.data)
+            
 		});
 	}, []);
     return (
@@ -76,7 +79,12 @@ export default function SelectChair () {
                     <input type="text" value={cpf} onChange={e => setCpf(e.target.value)} placeholder="Digite seu CPF..." required/>
                     
                 </div>
-                <button type="submit">Reservar assento(s)</button>
+                
+                
+
+                    <button type="submit">Reservar assento(s)</button>
+                
+              
             </form>
            
         </Select>

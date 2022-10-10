@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SelectFilm from "./SelectFilm";
 import SelectHour from "./SelectHour";
 import SelectChair from "./SelectChair";
+import End from "./End";
 
 
 export default function App () {
@@ -17,6 +18,7 @@ export default function App () {
                     <Route path="/" element={<SelectFilm/>} />
                     <Route path="/filme/:id" element={<SelectHour/>} />
                     <Route path="/sessao/:id" element={<SelectChair/>} />
+                    <Route path="/sucesso" element={<End/>} />
                 </Routes>
 
             </GlobalStyles>
